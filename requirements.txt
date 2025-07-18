@@ -1,11 +1,4 @@
-<<<<<<< HEAD
 flask
 flask-cors
 google-auth
 requests
-=======
-flask
-flask-cors
-google-auth
-requests
->>>>>>> ac5354b93328f2da5d327778b85c0dce43e3a1ab
