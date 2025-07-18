@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emergency Alert</title>
+</head>
+<body>
+    <h2>Kirim Alert ke Android</h2>
+    <label for="bandara">Bandara:</label>
+    <input type="text" id="bandara" value="bandara_lombok">
+    <br><br>
+
+    <label for="level">Level Siaga:</label>
+    <select id="level">
+        <option value="siaga_1">Siaga 1</option>
+        <option value="siaga_2">Siaga 2</option>
+        <option value="siaga_3">Siaga 3</option>
+    </select>
+    <br><br>
+
+    <button onclick="kirimAlert()">Kirim Alert</button>
+    <p id="status"></p>
+
+    <script>
+        async function kirimAlert() {
+            const bandara = document.getElementById("bandara").value;
+            const level = document.getElementById("level").value;
+            const status = document.getElementById("status");
+
+            try {
+                const response = await fetch("https://emergency-alert-api-production.up.railway.app/kirim-alert", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ bandara, level })
+                });
+
+                if (!response.ok) throw new Error("Gagal");
+
+                status.innerHTML = "✅ Alert berhasil dikirim.";
+            } catch (error) {
+                console.error(error);
+                status.innerHTML = "❌ Gagal mengirim alert.";
+            }
+        }
+    </script>
+</body>
+</html>
